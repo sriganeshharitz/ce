@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="admin-ibatis">
+	<typeAlias alias="loginBean" type="com.uttara.dyn.eval.beans.LoginBean" />
+	<typeAlias alias="userInfo" type="com.uttara.dyn.eval.beans.UserLoginBean"/>
+	<!-- <select id="login" parameterClass="loginBean"
+		resultClass="loginBean">
+		SELECT b.slno as studentSlno, a.first_name as firstName, a.last_name as lastName, a.login_name as loginName,
+			a.passwd as pwd, a.role as role,b.status as status,b.batch_no as batchNo,b.mobile as mobile
+			FROM uttara_mast a, uttara_user_mast b
+			WHERE a.login_name = b.login_name and Lower(a.login_name) = Lower(#loginName#)	
+	</select> -->
+	
+	<select id="login" parameterClass="loginBean" resultClass="userInfo">
+	SELECT b.slno, b.first_name as firstName, b.last_name as lastName, b.login_name as loginName,
+            b.email_id as emailId, b.passwd as password, b.role as role, b.status as status,
+            b.address as address, b.mobile as mobile, b.passed_out_year as passedOutYear,
+            b.uttara_Id as uttaraId, b.course_name as courseName,b.MAILID_CHECK as randomNum,
+            b.aggregate as aggregate,b.batch_no as batchNo,b.batch_id as batchId,  
+            b.education as education, b.specialization as specialization, 
+            b.about_uttara as aboutUttara, b.no_of_years as noOfYears, b.cm_date as cm_Date,
+            b.college as college, b.diploma_aggr as diplomaAggr,gender as gender,
+            b.special_student as specialStudent
+			FROM uttara_user_mast b 
+			WHERE LOWER(b.login_name) = LOWER(#loginName#)	
+	</select>
+	
+</sqlMap>
